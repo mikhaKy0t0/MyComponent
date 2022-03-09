@@ -7,7 +7,7 @@
         var field = component.get("v.fldDisp");
         var new_values=[];
         for (var i = 0; i < field.length; i++){
-            // VERY IMPORTANT PART
+            // VERY IMPORTANT PART here
             var val = obj[field[i]];
             new_values.push(val);
         }
