@@ -1,0 +1,16 @@
+<design:component>
+    <!-- Object -->
+    <design:attribute name="choose_object" datasource="contact, case, opportunity" label="Choose Object Type"
+                      description="Choose object to show related records"/>
+    
+    <!-- Fields to show -->
+    <design:attribute name="FieldsToDisplay" label="Choose Fields to Display"
+                      description="Be careful with Fields Name. Check it twice"/>
+    <design:attribute name="FieldsToDisplay2" label="Put here Fields Name"/>
+    
+    <design:attribute name="OrderField" label="FieldToSorting"/>
+
+    <design:attribute name="FormatDATA" datasource="Nov 23 2016, T Nov 22 16, Thursday Nov 23 16" label="Choose format to Display Date"/>
+    <design:attribute name="Link" label="Choose LINK field"/>
+    
+</design:component>
