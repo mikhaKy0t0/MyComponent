@@ -1,6 +1,7 @@
 ({
 	callServer : function(component, helper) {
         var reList = component.get("c.RelatedListComp");
+        //я бы объявлял этот эвент уже внутри самого колбека
         var myAppEvent = $A.get("e.c:mikhaEvent");
         component.set("v.Spinner", true);
         //component.set("v.OrderField", component.get("v.field2"));
@@ -19,7 +20,9 @@
                 // component.set("v.EventBoolean", true);
                 myAppEvent.fire();}
             else {
+                //раз уж сделал функцию для toastEvent почему бы ее не вызывать при ошибке? 
                 console.log("Failed with state:" + state);
+                //а спинер отключить?
             }
     });
         $A.enqueueAction(reList);

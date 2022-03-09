@@ -1,5 +1,5 @@
 ({
-    
+    // опять же lowerCamelCase для именования аттрибутов и функций 
     Action_comp : function(component, event, helper){
 		helper.callServer(component);
     },
@@ -15,6 +15,7 @@
         else {component.set("v.Direction", "ASC")};
         component.set("v.OrderField", sortField);
         
+        //опять же я так и не понял почему ты просто тут на вызываешь хелпер helper.callServer(component);
         $A.enqueueAction(component.get("c.Action_comp"));
     },
     
@@ -25,6 +26,7 @@
     },*/
     
     // STRING TO LIST
+    //вот это не обязательно было выносить в хелпер
     splitString: function(component, event, helper){
         helper.String(component);
     },

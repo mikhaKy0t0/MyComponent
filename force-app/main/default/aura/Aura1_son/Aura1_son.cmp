@@ -1,3 +1,4 @@
+<!-- а нужет тут такой набор имплементов?-->>
 <aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickAction"
                 access="global">
     
@@ -14,6 +15,8 @@
     
     <!-- <aura:handler name="change" value="{!v.EvAttr}" action="{!c.final}"/> -->
     <aura:handler event="c:mikhaEvent" action="{!c.final}"/>
+
+    <!-- Так и не ушел от того что поле Id в начале стоит? вроде же договаривались что уйдешь от этого и линку можно будет на любое поле вешать -->
     <td data-lavel="File Name">
         <a href="{! '/' + (v.iter.Id)}">
             {!v.Link}
@@ -22,6 +25,7 @@
     <aura:iteration  items="{!v.vals}" var="record">        
         <td data-lavel="File Name">
             {!record}
+            <!-- и где форматы полей? -->
             <p> 
                 <!-- <lightning:formattedDateTime value="{!record}" year="numeric" month="long" day="numeric" weekday="long"/> -->
             </p>
@@ -31,6 +35,10 @@
     <!-- flow 123-->
     <lightning:button variant="Brand" class="slds-button" label="Flow" onclick="{!c.flowAction}"/>
     
+    <!-- оно сейчас во всплывающем окне открывается? -->
+    <!-- выглядит сама компоненте как то сложно. в такой реализации можно было и не делать отдельную.  -->
+    <!-- переделать на создание через динамические компоненты -->
+    <!-- а я бы хотел иметь возможность настаивать вызываемое flow и передавать туда хотя бы id записи -->
     <aura:if isTrue="{!v.FlowBoolean}">
         <c:ModalFlow isOpen = "{!v.FlowBoolean}"/>
     </aura:if>
@@ -38,6 +46,7 @@
     <lightning:buttonMenu alternativeText="Show menu">
         <div>
             <lightning:button variant="Brand" class="slds-button" label="click"/>
+            <!-- что это? -->
             <lightning:button variant="Brand" class="slds-button" label="format" onclick="{!c.Format}"/> 
         </div>  
     </lightning:buttonMenu>

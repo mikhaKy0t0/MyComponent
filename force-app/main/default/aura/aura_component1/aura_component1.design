@@ -1,5 +1,6 @@
 <design:component>
     <!-- Object -->
+    <!-- Почему тут остался пиклист? -->
     <design:attribute name="choose_object" datasource="contact, case, opportunity" label="Choose Object Type"
                       description="Choose object to show related records"/>
     
@@ -8,9 +9,11 @@
                       description="Be careful with Fields Name. Check it twice"/>
     <design:attribute name="FieldsToDisplay2" label="Put here Fields Name"/>
     
+    <!-- ОписаниеПростоОгонь :) -->
     <design:attribute name="OrderField" label="FieldToSorting"/>
-
+<!-- а какие-то адовые варианты формата даты. можно это как-то более гибко без пиклиста тем более с такими зашитыми вариантами? типа MM/DD/YY или DD.MM.YYYY -->
     <design:attribute name="FormatDATA" datasource="Nov 23 2016, T Nov 22 16, Thursday Nov 23 16" label="Choose format to Display Date"/>
     <design:attribute name="Link" label="Choose LINK field"/>
+    <!-- не очень понял где "Возможность задавать формат отображения полей" -->
     
 </design:component>

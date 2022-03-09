@@ -1,4 +1,6 @@
+<!-- огонь описание-->
 <aura:event type="APPLICATION" description="WORK PLEASE">
     <!-- Attributes here - not in use -->
+    <!-- ну раз "not in use" то комменть -->
     <aura:attribute name="attr1" type="String"/>
 </aura:event>

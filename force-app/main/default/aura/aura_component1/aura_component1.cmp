@@ -1,13 +1,17 @@
+<!-- поменять название компоненты -->
 <aura:component controller="AuraAccountController"
                 implements="flexipage:availableForAllPageTypes,force:hasRecordId"
                 access="global">
     
     <!-- DONT TOUCH -->
+    <!-- у тебя тут прям все варианты именования переменных, по хорошему нужно использовать один например lowerCamelCase без подчеркиваний и первая буква в низком регистре -->
     <aura:attribute name="ObjectList" type="type[]" />
     <aura:attribute name="recordId" type="Id" />
     <aura:attribute name="choose_object" type="String" default="contact" required="true"/>
     <aura:attribute name="Spinner" type="boolean" default="false"/>
+
     <aura:handler name="init" value="{!this}" action="{!c.Action_comp}" />
+    <!-- плохо иметь 2 обработчика одного события потому, что не гарантируется последовательность выполнения -->
     <aura:handler name="init" value="{!this}" action="{!c.splitString}" />
     
     <!-- Record Fields -->
@@ -15,6 +19,7 @@
     <aura:attribute name="FieldsList" type="type[]"/>
     
     <!-- Header Fields -->
+    <!-- лучше не использовать цифры в названия переменных. Надо придумывать более значимые названия переменных -->
     <aura:attribute name="FieldsToDisplay2" type="String"/>
     <aura:attribute name="FieldsList2" type="type[]"/>
     <aura:attribute name="OrderField" type="String"/> 
@@ -26,6 +31,7 @@
     <aura:registerEvent name="mikhaEvent" type="c:mikhaEvent"/>    
     
     <!-- EVENT Attribute - not in use -->
+    <!-- ну если "not in use" то и закоменть его полностью -->
     <aura:attribute name="EventBoolean" type="boolean" default="false"/>
     
     <lightning:card iconName="{! 'standard:'+(v.choose_object)}" title="{!v.choose_object}">
@@ -47,6 +53,7 @@
                     <tr class="slds-line-height_reset">
                         <aura:iteration items="{!v.FieldsList2}" var="field2" indexVar="index" aura:id="auraId">
                             <th scope="col">
+                                <!-- что за странная конструкция? зачем этот пустой div? -->
                                 <div class="slds-truncate" title="{!field2}" /> {!field2} 
                                 <!-- Button -->
                                 <lightning:buttonIcon iconName="utility:sort" variant="bare" title="{!field2}"

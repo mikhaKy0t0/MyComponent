@@ -16,6 +16,7 @@
     },
     
     // FLOW call
+    //что-то я не понимаю как его открыть повторно для одной записи
     flowAction: function (component, event, helper){
         if (component.get("v.FlowBoolean") == false){
             component.set("v.FlowBoolean", true);
