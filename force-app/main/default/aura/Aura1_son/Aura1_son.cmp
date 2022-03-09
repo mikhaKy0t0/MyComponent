@@ -1,0 +1,44 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickAction"
+                access="global">
+    
+    <!-- Attributes from Parent -->
+    <aura:attribute name="iter" type="Object"/>
+    <aura:attribute name="fldDisp" type="type[]"/>
+    <aura:attribute name="vals" type="String[]"/>
+    <aura:attribute name="EvAttr" type="boolean" default="false"/>
+    <aura:attribute name="Link" type="String"/>
+    
+    <!-- FLOW -->
+    <aura:attribute name="FlowBoolean" type="boolean" default="false"/>
+    <aura:attribute name="FormatDATA" type="String"/>
+    
+    <!-- <aura:handler name="change" value="{!v.EvAttr}" action="{!c.final}"/> -->
+    <aura:handler event="c:mikhaEvent" action="{!c.final}"/>
+    <td data-lavel="File Name">
+        <a href="{! '/' + (v.iter.Id)}">
+            {!v.Link}
+        </a>
+    </td>
+    <aura:iteration  items="{!v.vals}" var="record">        
+        <td data-lavel="File Name">
+            {!record}
+            <p> 
+                <!-- <lightning:formattedDateTime value="{!record}" year="numeric" month="long" day="numeric" weekday="long"/> -->
+            </p>
+        </td> 
+    </aura:iteration>
+    
+    <!-- flow -->
+    <lightning:button variant="Brand" class="slds-button" label="Flow" onclick="{!c.flowAction}"/>
+    
+    <aura:if isTrue="{!v.FlowBoolean}">
+        <c:ModalFlow isOpen = "{!v.FlowBoolean}"/>
+    </aura:if>
+    
+    <lightning:buttonMenu alternativeText="Show menu">
+        <div>
+            <lightning:button variant="Brand" class="slds-button" label="click"/>
+            <lightning:button variant="Brand" class="slds-button" label="format" onclick="{!c.Format}"/> 
+        </div>  
+    </lightning:buttonMenu>
+</aura:component>
