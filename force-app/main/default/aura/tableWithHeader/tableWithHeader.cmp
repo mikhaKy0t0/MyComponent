@@ -1,0 +1,75 @@
+<aura:component controller="relatedController"
+                implements="flexipage:availableForAllPageTypes,force:hasRecordId"
+                access="global">
+
+    <!-- main attributes -->
+    <aura:attribute name="objectList" type="Type[]" />
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name="chosenObject" type="String" default="contact" required="true"/>
+    <aura:attribute name="spinner" type="Boolean" default="false"/>
+    
+    <!-- Apex Query -->
+    <aura:attribute name="fieldsToQuery" type="String" default="Name"/>
+    <aura:attribute name="listToQuery" type="type[]"/>
+    
+    <aura:attribute name="orderField" type="String"/> 
+    <aura:attribute name="direction" type="String" default="ASC"/>
+    
+    <!-- Header Fields -->
+    <aura:attribute name="fieldsToDisplay" type="String"/>
+    <aura:attribute name="listToDisplay" type="type[]"/>
+    
+    <!-- Format -->
+    <aura:attribute name="dataFormat" type="String"/>
+    <aura:attribute name="listFormat" type="type[]"/>
+    
+    <!-- Event Register + handler -->
+    <aura:registerEvent name="mikhaEvent" type="c:mikhaEvent"/>    
+    <aura:handler name="init" value="{!this}" action="{!c.mainAction}" />
+
+    <!-- EVENT Attribute - not in use
+    <aura:attribute name="EventBoolean" type="boolean" default="false"/> -->
+    
+    <lightning:card iconName="{! 'standard:'+(v.chosenObject)}" title="{!v.chosenObject}">
+        <!--spinner start -->
+        <aura:if isTrue="{!v.spinner}">
+            <div aura:id="spinnerId" class="slds-spinner_container">
+                <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+        </aura:if>
+        <!-- spinner end -->
+        <!-- checking for data coming -->
+        <aura:if isTrue="{!not(empty(v.objectList))}">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered" >
+                <!-- HEADER -->
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <aura:iteration items="{!v.listToDisplay}" var="fieldName" indexVar="index" aura:id="auraId">
+                            <th scope="col"> {!fieldName} 
+                                <!-- Button -->
+                                <lightning:buttonIcon iconName="utility:sort" variant="bare" title="{!fieldName}"
+                                                      onclick="{!c.clickToSort}" value="{!index}"/>
+                            </th>
+                        </aura:iteration>
+                    </tr>
+                </thead>
+                <!-- BODY TABLE -->
+                <tbody>
+                    <aura:iteration items="{!v.objectList}" var="record">
+                        <tr class="slds-line-height_reset">
+                            <!-- call Child here (inside forming values)-->
+                            <c:tableValues iter="{!record}" fldsDisp="{!v.listToQuery}" eventAttr="{!v.spinner}" 
+                            format="{!v.listFormat}"/>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+            <aura:set attribute="else">
+                <div Style="text-align : center"> " There are no related {!v.chosenObject} "</div>
+            </aura:set>
+        </aura:if>   
+    </lightning:card>
+</aura:component>

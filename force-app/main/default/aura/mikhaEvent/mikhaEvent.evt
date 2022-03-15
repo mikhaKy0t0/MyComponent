@@ -1,4 +1,4 @@
 <aura:event type="APPLICATION" description="WORK PLEASE">
-    <!-- Attributes here - not in use -->
-    <aura:attribute name="attr1" type="String"/>
+    <!-- Attributes here - not in use
+    <aura:attribute name="attr1" type="String"/> -->
 </aura:event>
