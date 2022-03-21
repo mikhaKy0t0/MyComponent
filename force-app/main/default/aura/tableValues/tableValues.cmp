@@ -1,57 +1,60 @@
 <aura:component implements="force:hasRecordId"
                 access="global">
     
-    <!-- Attributes -->
+    <!-- Attributes From tableWithHeader component -->
     <aura:attribute name="iter" type="Object"/>
     <aura:attribute name="fldsDisp" type="type[]"/>
-    <aura:attribute name="values" type="Object[]"/>
-    <aura:attribute name="eventAttr" type="boolean" default="false"/>
     <aura:attribute name="format" type="String[]"/>
+    <aura:attribute name="flowToUse" type="String"/>
+    <aura:attribute name="dateForm" type="String"/>
+    <!-- Forming in Controller -->
+    <aura:attribute name="values" type="Object[]"/>
 
-    <!-- FLOW -->
-    <aura:attribute name="flowBoolean" type="boolean" default="false"/>
+    <!-- FLOW
+    <aura:handler name="change" value="{!v.EvAttr}" action="{!c.final}"/> 
+    -->
+
+    <aura:handler event="c:tableWithHeaderEvent" action="{!c.formingRows}"/>
     
-    <!-- <aura:handler name="change" value="{!v.EvAttr}" action="{!c.final}"/> -->
-    <aura:handler event="c:mikhaEvent" action="{!c.final}"/>
-
     <aura:iteration  items="{!v.values}" var="record">        
         <td data-lavel="File Name">
             <aura:if isTrue="{!record.format == 'Link'}">
-                <a href="{! '/' + (v.iter.Id)}">
-                    {!record.value}
-                </a>
-                <aura:set attribute="else">
-                    <aura:if isTrue="{!record.format == 'Nubmer'}">
-                        <ui:outputNumber value="{!record.value}"/>
-                    </aura:if>
-                    <aura:if isTrue="{!record.format == 'Email'}">
-                        <ui:outputEmail value="{!record.value}"/>
-                    </aura:if>
-                    <aura:if isTrue="{!record.format == 'Checkbox'}">
-                        <ui:outputCheckbox value="{!record.value}"/>
-                    </aura:if>
-                    <aura:if isTrue="{!record.format == 'Date'}">
-                        <ui:outputDate value="{!record.value}"/>
-                    </aura:if>
-                    <aura:if isTrue="{!record.format == 'none'}">
-                        {!record.value}
-                    </aura:if>
-                </aura:set>
+                <a href="{! '/' + (v.iter.Id)}"> {!record.value}</a>
+            </aura:if>        
+            <aura:if isTrue="{!record.format == 'Nubmer'}">
+                <ui:outputNumber value="{!record.value}"/>
             </aura:if>
+            <aura:if isTrue="{!record.format == 'Email'}">
+                <ui:outputEmail value="{!record.value}"/>
+            </aura:if>
+            <aura:if isTrue="{!record.format == 'Checkbox'}">
+                <ui:outputCheckbox value="{!record.value}"/>
+            </aura:if>
+            <aura:if isTrue="{!record.format == 'Date'}">
+                <ui:outputDate value="{!record.value}" format='{!record.specFormatObj}'/>
+            </aura:if>
+            <aura:if isTrue="{!record.format == 'none'}">
+                {!record.value}
+            </aura:if>
+                
+            
         </td> 
     </aura:iteration>
     
     <!-- Flow Button -->
     <lightning:overlayLibrary aura:id="overlayLib"/>
-	<lightning:button iconName="utility:flow" label="Open Survery Flow" onclick="{!c.handleShowModal}"/>
+	<lightning:button iconName="utility:flow" label="Open Flow" onclick="{!c.handleShowModal}"/>
 
-    <!-- <lightning:button variant="Brand" class="slds-button" label="Flow" onclick="{!c.flowAction}"/>
-        <lightning:flow aura:id="myCustomFlow" /> -->
+    <!-- Flow - reworked 
+        <lightning:button variant="Brand" class="slds-button" label="Flow" onclick="{!c.flowAction}"/>
+        <lightning:flow aura:id="myCustomFlow" /> 
+    -->
     
-        <!-- Flow Call - reworked 
+    <!-- 
     <aura:if isTrue="{!v.flowBoolean}">
         <c:ModalFlow isOpen = "{!v.flowBoolean}"/>
-    </aura:if> -->
+    </aura:if> 
+    -->
     
     <!-- Only for practice - not in use
     <lightning:buttonMenu alternativeText="Show menu">
@@ -59,5 +62,6 @@
             <lightning:button variant="Brand" class="slds-button" label="click"/>
             <lightning:button variant="Brand" class="slds-button" label="format" onclick="{!c.Format}"/> 
         </div>  
-    </lightning:buttonMenu> -->
+    </lightning:buttonMenu> 
+    -->
 </aura:component>

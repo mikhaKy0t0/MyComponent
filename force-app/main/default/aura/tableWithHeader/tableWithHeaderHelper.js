@@ -2,7 +2,6 @@
 	callServer : function(component, helper) {
         var queryList = component.get("c.relatedRecords");
         component.set("v.spinner", true);
-        //component.set("v.OrderField", component.get("v.field2"));
         queryList.setParams({recordId: component.get("v.recordId"), 
                           chosenObject: component.get("v.chosenObject"),
                           fieldsToQuery: component.get("v.fieldsToQuery"),
@@ -10,7 +9,7 @@
                           direction: component.get("v.direction")});
         
         queryList.setCallback(this, function(data){
-            var myCompEvent = $A.get("e.c:mikhaEvent");
+            var myCompEvent = $A.get("e.c:tableWithHeaderEvent");
             let state = data.getState();
             if (state === "SUCCESS") {
                 this.showSuccesfullyToast(component);
@@ -45,7 +44,8 @@
         var toastSuccessEvent = $A.get("e.force:showToast");
         toastSuccessEvent.setParams({
             "title": "State of Your Query",
-            "message": "SUCCESS"
+            "message": "SUCCESS",
+            "type": 'success'
         });
         toastSuccessEvent.fire();
     },
@@ -54,7 +54,8 @@
         var toastNegativeEvent = $A.get("e.force:showToast");
         toastNegativeEvent.setParams({
             "title": "State of Your Query",
-            "message": "UNSUCCESSFULLY"
+            "message": "UNSUCCESSFULLY",
+             "type": 'error'
         });
         toastNegativeEvent.fire();
     }

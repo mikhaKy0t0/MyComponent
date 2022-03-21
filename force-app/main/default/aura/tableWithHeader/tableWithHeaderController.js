@@ -16,13 +16,14 @@
         else {component.set("v.direction", "ASC")};
         component.set("v.orderField", sortField);
         
-        $A.enqueueAction(helper.callServer(component));
+        helper.callServer(component);
     },
     
     /* to Fire Event - not in use
     FireFire: function(component, event){
         var myAppEvent = $A.get("e.c:mikhaEvent"); 
         myAppEvent.fire(); 
-    },*/
+    },
+    */
     
 })

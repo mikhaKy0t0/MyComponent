@@ -1,4 +1,4 @@
-<aura:component controller="relatedController"
+<aura:component controller="tableWithHeaderController"
                 implements="flexipage:availableForAllPageTypes,force:hasRecordId"
                 access="global">
 
@@ -19,16 +19,20 @@
     <aura:attribute name="fieldsToDisplay" type="String"/>
     <aura:attribute name="listToDisplay" type="type[]"/>
     
+    
     <!-- Format -->
     <aura:attribute name="dataFormat" type="String"/>
     <aura:attribute name="listFormat" type="type[]"/>
-    
+    <!-- Flow -->
+    <aura:attribute name="flowToUse" type="String"/>
+
     <!-- Event Register + handler -->
-    <aura:registerEvent name="mikhaEvent" type="c:mikhaEvent"/>    
+    <aura:registerEvent name="tableWithHeaderEvent" type="c:tableWithHeaderEvent"/>    
     <aura:handler name="init" value="{!this}" action="{!c.mainAction}" />
 
     <!-- EVENT Attribute - not in use
-    <aura:attribute name="EventBoolean" type="boolean" default="false"/> -->
+    <aura:attribute name="EventBoolean" type="boolean" default="false"/>
+    -->
     
     <lightning:card iconName="{! 'standard:'+(v.chosenObject)}" title="{!v.chosenObject}">
         <!--spinner start -->
@@ -41,35 +45,36 @@
             </div>
         </aura:if>
         <!-- spinner end -->
-        <!-- checking for data coming -->
-        <aura:if isTrue="{!not(empty(v.objectList))}">
-            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered" >
-                <!-- HEADER -->
-                <thead>
-                    <tr class="slds-line-height_reset">
-                        <aura:iteration items="{!v.listToDisplay}" var="fieldName" indexVar="index" aura:id="auraId">
-                            <th scope="col"> {!fieldName} 
-                                <!-- Button -->
-                                <lightning:buttonIcon iconName="utility:sort" variant="bare" title="{!fieldName}"
-                                                      onclick="{!c.clickToSort}" value="{!index}"/>
-                            </th>
-                        </aura:iteration>
-                    </tr>
-                </thead>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered" >
+            <!-- HEADER -->
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <aura:iteration items="{!v.listToDisplay}" var="fieldName" indexVar="index" aura:id="auraId">
+                        <th scope="col"> {!fieldName} 
+                            <!-- Button -->
+                            <lightning:buttonIcon iconName="utility:sort" variant="bare" title="{!fieldName}"
+                                                    onclick="{!c.clickToSort}" value="{!index}"/>
+                        </th>
+                    </aura:iteration>
+                </tr>
+            </thead>
+            <!-- checking for data coming -->
+            <aura:if isTrue="{!not(empty(v.objectList))}">
                 <!-- BODY TABLE -->
                 <tbody>
                     <aura:iteration items="{!v.objectList}" var="record">
                         <tr class="slds-line-height_reset">
                             <!-- call Child here (inside forming values)-->
-                            <c:tableValues iter="{!record}" fldsDisp="{!v.listToQuery}" eventAttr="{!v.spinner}" 
-                            format="{!v.listFormat}"/>
+                            <c:tableValues iter="{!record}" fldsDisp="{!v.listToQuery}" 
+                            format="{!v.listFormat}" flowToUse="{!v.flowToUse}"/>
                         </tr>
                     </aura:iteration>
                 </tbody>
-            </table>
-            <aura:set attribute="else">
+            </aura:if>
+        </table>
+            <aura:if isTrue="{!(empty(v.objectList))}">
                 <div Style="text-align : center"> " There are no related {!v.chosenObject} "</div>
-            </aura:set>
-        </aura:if>   
+            </aura:if>
+            
     </lightning:card>
 </aura:component>

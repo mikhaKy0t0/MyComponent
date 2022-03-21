@@ -1,0 +1,2 @@
+<aura:event type="APPLICATION" description="To call tableValues component in right moment (when data from apex came)">
+</aura:event>
