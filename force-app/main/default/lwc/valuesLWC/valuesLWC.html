@@ -1,0 +1,21 @@
+<template>
+    <template if:true={cellLink}>
+        <a href={link}> {xIter.value}</a>
+    </template>
+
+    <template if:true={cellDate}>
+        <lightning-formatted-date-time value={xIter.value}> </lightning-formatted-date-time>
+    </template>
+
+    <template if:true={cellCheckbox}>
+        <lightning-icon icon-name={xIter.value}> </lightning-icon>
+    </template>
+
+    <template if:true={cellNumber}>
+        <lightning-formatted-number value={xIter.value}></lightning-formatted-number>
+    </template>
+
+    <template if:true={cellNoFormat}>
+        {xIter.value}
+    </template>
+</template>

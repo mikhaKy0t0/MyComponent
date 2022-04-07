@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage,lightning__AppPage,lightning__HomePage">
+            <property name="chosenObject" type="String" label="Choose Object"
+            description="Choose Object to show related records"/>
+            <property name="fieldsToQuery" type="String" label="Put Fields to Apex Query"
+                    description="only API Name here. Check it twice"/>
+            <property name="fieldsToDisplay" type="String" label="Put fields to table header"/>
+            <property name="orderField" type="String" label="Put field to sorting"/>
+            <property name="direction" type="String" default="ASC"/>
+            <property name="datFormat" type="String" label="Put format to display data"/>
+        </targetConfig> 
+    </targetConfigs>
+</LightningComponentBundle>
