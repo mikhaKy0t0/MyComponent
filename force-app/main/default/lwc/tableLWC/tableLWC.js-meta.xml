@@ -19,4 +19,5 @@
             <property name="datFormat" type="String" label="Put format to display data"/>
         </targetConfig> 
     </targetConfigs>
+    <!-- new -->
 </LightningComponentBundle>

@@ -2,6 +2,7 @@ import { LightningElement, api, track } from 'lwc';
 
 export default class ValeusLWC extends LightningElement {
     // Attributes From tableLWC component
+    // new
     @api iter;
     @track xIter;
 

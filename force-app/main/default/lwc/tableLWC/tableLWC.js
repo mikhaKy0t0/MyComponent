@@ -6,6 +6,7 @@ export default class TableLWC extends LightningElement {
 
     // @api decorator marks attribute as a public property
     // this attribtues came from js-meta.xml file
+    // new
     @api chosenObject;    
     @api fieldsToQuery;
     @api fieldsToDisplay;    
@@ -16,7 +17,7 @@ export default class TableLWC extends LightningElement {
 
     @track objectList;
     @track values;
-    @track isMo\dalOpen = false;
+    @track isModalOpen = false;
     
     iconName;
     spinner = true;
