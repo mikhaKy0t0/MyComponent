@@ -1,0 +1,18 @@
+<design:component>
+    <!-- Object -->
+    <design:attribute name="chosenObject" label="Choose Object"
+                      description="Choose Object to show related records"/>
+    
+    <!-- Fields to SOQL (only API Name here) -->
+    <design:attribute name="fieldsToQuery" label="Put Fields to Apex Query"
+                      description="only API Name here. Check it twice"/>
+
+    <!-- Table Header -->
+    <design:attribute name="fieldsToDisplay" label="Put fields to table header"/>
+
+    <design:attribute name="orderField" label="Put field to sorting"/>
+    <design:attribute name="dataFormat" label="Put format to display data"/>
+    <design:attribute name="flowToUse" label="Put here Flow's API name to use"/>
+
+    
+</design:component>
