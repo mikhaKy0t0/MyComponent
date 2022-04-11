@@ -9,7 +9,6 @@ public with sharing class AuraAccountController{
         else {
             SOQLquery='Select '+ FieldsToDisplay + ' FROM ' + choose_object + ' WHERE AccountId =: recordId';
         }
-        ReList = Database.query(SOQLquery);
-        return ReList;
+        return Database.query(SOQLquery);
     }
 }
