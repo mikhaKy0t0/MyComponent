@@ -1,5 +1,4 @@
 <template>
-    <!-- new -->
     <lightning-card icon-name={iconName} title={chosenObject}>
         <!-- spinner code -->
         <template if:true={spinner}>
@@ -10,7 +9,6 @@
                 </div>
             </div>
         </template>
-        
         <!-- table code -->
             <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
                 <!-- Header of the table -->
@@ -18,7 +16,6 @@
                     <tr class="slds-line-height_reset">
                         <template for:each={listToDisplay} for:item="fieldName" for:index="indexVar"> 
                             <th key={fieldName} scope="col" class="">
-                                {indexVar}
                                 {fieldName} 
                                 <!--Sort Button -->
                                 <lightning-button-icon icon-name="utility:sort" variant="bare" title={fieldName} onclick={clickToSort} data-name={indexVar}>
@@ -33,9 +30,9 @@
                     <!-- Body of table -->
                     <tbody>
                         <template for:each={values} for:item="row">
-                            <tr key={row.Id}>
-                                <template for:each={row} for:item="cell">
-                                    <td key={cell.keyId}>
+                            <tr key={row.rowId}>
+                                <template for:each={row.rowData} for:item="cell">
+                                    <td key={cell.cellId}>
                                         <c-values-l-w-c iter={cell}></c-values-l-w-c>
                                     </td>
                                 </template>

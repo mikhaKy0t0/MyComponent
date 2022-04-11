@@ -6,7 +6,6 @@ export default class TableLWC extends LightningElement {
 
     // @api decorator marks attribute as a public property
     // this attribtues came from js-meta.xml file
-    // new
     @api chosenObject;    
     @api fieldsToQuery;
     @api fieldsToDisplay;    
@@ -15,9 +14,9 @@ export default class TableLWC extends LightningElement {
     @api datFormat;
     @api recordId;
 
-    @track objectList;
-    @track values;
-    @track isModalOpen = false;
+    objectList;
+    values;
+    isModalOpen = false;
     
     iconName;
     spinner = true;
@@ -46,6 +45,7 @@ export default class TableLWC extends LightningElement {
             variant: this.message.status,
         });
         this.dispatchEvent(evt);
+        this.spinner = false;
     }
 
     // WORKS automate
@@ -74,14 +74,13 @@ export default class TableLWC extends LightningElement {
 
     clickToSort(event){
         var buttonPosition = event.target.dataset.name;
-        var sortField = this.listToQuery[buttonPosition];
 
         if (this.direction == "ASC") {
             this.direction = "DESC";
         }
         else {this.direction = "ASC";
         };
-        this.orderField = sortField;
+        this.orderField = this.listToQuery[buttonPosition];
     }
 
     formingCells(){
@@ -89,26 +88,27 @@ export default class TableLWC extends LightningElement {
         var newObj=[];
         // var regExpIn = /\((.*)\)/; -  not in use because format doesn't supported
         // var regExpOut = /(.*?)\(/; - not in use
-        for (var i = 0; i < this.objectList.length; i++){
-            var currentRecord = this.objectList[i];
-            for (var l = 0; l < (this.listToQuery.length); l++){
-                var formatMain = ((this.listFormat[l].includes('Date')) ? 'Date' : this.listFormat[l]);
+        for (var rowNumber = 0; rowNumber < this.objectList.length; rowNumber++){
+            var currentRecord = this.objectList[rowNumber];
+            for (var columnNumber = 0; columnNumber < (this.listToQuery.length); columnNumber++){
+                var formatMain = ((this.listFormat[columnNumber].includes('Date')) ? 'Date' : this.listFormat[columnNumber]);
                 // format is not support for Date in LWC
                 // var formatSpec = ((this.listFormat[l].includes('Date(')) ? regExpIn.exec(this.listFormat[l]) : this.listFormat[l]);
-                var quer = this.listToQuery[l];
+                var quer = this.listToQuery[columnNumber];
                 var customObj = {
                     value: currentRecord[quer],
                     format: formatMain,
                     //specFormatObj: (formatSpec == 'Date' || formatSpec == this.listFormat[l] ? '' : formatSpec[1]),
-                    keyId: this.objectList[i].Id
+                    cellId: this.objectList[rowNumber].Id + columnNumber
                 };
                 newValues.push(customObj);
             };
-            newObj[i] = newValues;
+            newObj[rowNumber] = {
+                rowId: this.objectList[rowNumber].Id, 
+                rowData: newValues};
             newValues=[];
         }
-        this.values = newObj;
-        this.spinner = false;     
+        this.values = newObj;   
     }
 
     openModal() {
