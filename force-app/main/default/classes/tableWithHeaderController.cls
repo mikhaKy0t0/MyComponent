@@ -9,7 +9,6 @@ public with sharing class tableWithHeaderController{
         else {
             myQuery='Select '+ fieldsToQuery + ' FROM ' + chosenObject + ' WHERE AccountId =: recordId';
         }
-        queryList = Database.query(myQuery);
-        return queryList;
+        return Database.query(myQuery);
     }
 }
